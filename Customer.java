@@ -1,6 +1,7 @@
 package cpsc4620;
 
 //Test commit
+//test commit 2
 public class Customer {
 
 	/*
