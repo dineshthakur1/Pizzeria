@@ -82,7 +82,7 @@ public final class DBNinja {
 		 * adding the order to the order DB table, but we're also recording
 		 * the necessary data for the delivery, dinein, and pickup tables
 		 */
-	
+		//TODO
 
 		
 		//DO NOT FORGET TO CLOSE YOUR CONNECTION
@@ -97,6 +97,7 @@ public final class DBNinja {
 		 * instance of topping usage to that bridge table if you have't accounted
 		 * for that somewhere else.
 		 */
+		//TODO
 		
 		
 		
@@ -113,6 +114,7 @@ public final class DBNinja {
 		 * It goes and fetches the largest PizzaID in the pizza table.
 		 * You wont need this function if you didn't forget to do that
 		 */
+		//TODO
 		
 		
 		
@@ -133,6 +135,7 @@ public final class DBNinja {
 		 * that you've run out of that topping.
 		 */
 		
+		//TODO
 		
 		
 		
@@ -151,6 +154,7 @@ public final class DBNinja {
 		 * You might use this, you might not depending on where / how to want to update
 		 * this table
 		 */
+		//TODO
 		
 		
 		
@@ -167,6 +171,7 @@ public final class DBNinja {
 		 * You might use this, you might not depending on where / how to want to update
 		 * this table
 		 */
+		//TODO
 		
 		
 		
@@ -183,6 +188,7 @@ public final class DBNinja {
 		/*
 		 * This should add a customer to the database
 		 */
+		//TODO
 				
 		
 		
@@ -200,6 +206,7 @@ public final class DBNinja {
 		 * for this, or maybe a completed time timestamp. However you have it.
 		 */
 		
+		//TODO
 
 
 		
@@ -220,6 +227,7 @@ public final class DBNinja {
 		 */
 
 
+		//TODO
 		
 		
 		
@@ -243,6 +251,7 @@ public final class DBNinja {
 		 * The topping list should also print in alphabetical order
 		 */
 		
+		//TODO
 		
 		
 		
@@ -290,6 +299,7 @@ public final class DBNinja {
 		 * these orders should print in order from newest to oldest.
 		 */
 
+		//TODO
 
 
 		
@@ -306,6 +316,7 @@ public final class DBNinja {
 		 */
 		
 		
+		//TODO
 		
 		
 		
@@ -323,6 +334,7 @@ public final class DBNinja {
 		
 		
 		
+		//TODO
 		
 		
 		
@@ -348,10 +360,6 @@ public final class DBNinja {
 		return Integer.parseInt(date.substring(8, 10));
 	}
 
-
-
-	
-	
 	
 	public static double getBaseCustPrice(String size, String crust) throws SQLException, IOException {
 		connect_to_db();
@@ -420,6 +428,7 @@ public final class DBNinja {
 		//returns a list of all the discounts.
 		
 		
+		//TODO
 		
 		
 		
@@ -440,6 +449,7 @@ public final class DBNinja {
 		*/
 
 
+		//TODO
 		
 		
 		
@@ -458,6 +468,7 @@ public final class DBNinja {
 		 */
 		
 		
+		//TODO
 		
 		
 		
@@ -479,6 +490,7 @@ public final class DBNinja {
 		 */
 
 
+		//TODO
 		
 		
 		
@@ -499,6 +511,7 @@ public final class DBNinja {
 		 */
 		
 		
+		//TODO
 		
 		
 		
@@ -517,6 +530,7 @@ public final class DBNinja {
 		 */
 		
 		
+		//TODO
 		
 		
 		
