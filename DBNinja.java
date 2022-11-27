@@ -255,6 +255,7 @@ public final class DBNinja {
 	
 	
 	public static ArrayList<Topping> getInventory() throws SQLException, IOException {
+		ArrayList<Topping> topp = new ArrayList<Topping>();
 		connect_to_db();
 		/*
 		 * This function actually returns the toppings. The toppings
@@ -262,13 +263,16 @@ public final class DBNinja {
 		 * plan on using a printInventory function
 		 */
 
-		
+		String query = "Select t_Name from TOPPING ORDER BY t_Name ASC;";
+		Statement stmt = conn.createStatement();
+		ResultSet rset = stmt.executeQuery(query);
 
+		while (rset.next()){
+			topp = rset.getString(1);
+		}
 		
-		
-		
-		
-		
+		conn.close();
+
 		//DO NOT FORGET TO CLOSE YOUR CONNECTION
 		return null;
 	}
@@ -354,13 +358,15 @@ public final class DBNinja {
 		double bp = 0.0;
 		// add code to get the base price (for the customer) for that size and crust pizza Depending on how
 		// you store size & crust in your database, you may have to do a conversion
+		String query = "Select pr_Price from BASEPRICE WHERE pr_Size=" + size + " and pr_Crust=" + crust + ";";
+		Statement stmt = conn.createStatement();
+		ResultSet rset = stmt.executeQuery(query);
+
+		while (rset.next()){
+			bp = rset.getString(1);
+		}
 		
-		
-		
-		
-		
-		
-		
+		conn.close();
 		//DO NOT FORGET TO CLOSE YOUR CONNECTION
 		return bp;
 	}
@@ -393,7 +399,7 @@ public final class DBNinja {
 		// add code to get the base cost (for the business) for that size and crust pizza Depending on how
 		// you store size and crust in your database, you may have to do a conversion
 		
-		String query = "Select pr_Cost from baseprice WHERE pr_Size=" + size + " and pr_Crust=" + crust + ";";
+		String query = "Select pr_Cost from BASEPRICE WHERE pr_Size=" + size + " and pr_Crust=" + crust + ";";
 		Statement stmt = conn.createStatement();
 		ResultSet rset = stmt.executeQuery(query);
 
