@@ -393,9 +393,15 @@ public final class DBNinja {
 		// add code to get the base cost (for the business) for that size and crust pizza Depending on how
 		// you store size and crust in your database, you may have to do a conversion
 		
+		String query = "Select pr_Cost from baseprice WHERE pr_Size=" + size + " and pr_Crust=" + crust + ";";
+		Statement stmt = conn.createStatement();
+		ResultSet rset = stmt.executeQuery(query);
+
+		while (rset.next()){
+			bp = rset.getString(1);
+		}
 		
-		
-		
+		conn.close();
 		
 		//DO NOT FORGET TO CLOSE YOUR CONNECTION
 		return bp;

@@ -15,13 +15,13 @@ import java.util.ArrayList;
 public class DBConnector {
 
     // enter your user name here
-    private static String user = "";
+    private static String user = "admin";
     // enter your password here
-    private static String password = "";
+    private static String password = "password";
     // enter your database name here
-    private static String database_name = "";
+    private static String database_name = "cpsc4620";
     // Do not change the port. 3306 is the default MySQL port
-    private static String url = "";
+    private static String url = "jdbc:mysql://localhost:3306";
     private static Connection conn;
 
 
