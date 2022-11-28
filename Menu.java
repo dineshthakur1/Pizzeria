@@ -120,10 +120,16 @@ public class Menu {
 		/*
 		 * Simply print out all of the customers from the database. 
 		 */
-		getCustomerList();
-		
+		try
+		{
+			DBNinja.getCustomerList();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 
-		
+
 	}
 	
 
