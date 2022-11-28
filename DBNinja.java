@@ -277,7 +277,7 @@ public final class DBNinja {
 		ResultSet rset = stmt.executeQuery(query);
 
 		while (rset.next()){
-			topp = rset.getString(1);
+			topp = rset.getArray(1);
 		}
 		
 		conn.close();
@@ -371,7 +371,7 @@ public final class DBNinja {
 		ResultSet rset = stmt.executeQuery(query);
 
 		while (rset.next()){
-			bp = rset.getString(1);
+			bp = rset.getDouble(1);
 		}
 		
 		conn.close();
@@ -412,7 +412,7 @@ public final class DBNinja {
 		ResultSet rset = stmt.executeQuery(query);
 
 		while (rset.next()){
-			bp = rset.getString(1);
+			bp = rset.getDouble(1);
 		}
 		
 		conn.close();
