@@ -24,6 +24,8 @@ import java.util.Date;
  * A utility class to help add and retrieve information from the database
  */
 
+//Hello DBNinja comment
+
 public final class DBNinja {
 	private static Connection conn;
 
