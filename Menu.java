@@ -123,8 +123,9 @@ public class Menu {
 		try
 		{
 			ArrayList<Customer> a = DBNinja.getCustomerList();
-			for (Customer c:a){
-				System.out.println(a.toString());
+			for (int i = 0; i< a.size(); i++){
+
+				System.out.println(a.get(i).toString());
 			}
 		}
 		catch(Exception e)
