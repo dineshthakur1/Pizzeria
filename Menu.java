@@ -132,8 +132,6 @@ public class Menu {
 		{
 			e.printStackTrace();
 		}
-
-
 	}
 	
 
@@ -193,13 +191,24 @@ public class Menu {
 	public static void ViewInventoryLevels() throws SQLException, IOException 
 	{
 		//print the inventory. I am really just concerned with the ID, the name, and the current inventory
-		
-		
-		
-		
-		
-		
-		
+		try
+		{
+			ArrayList<Topping> t = DBNinja.getInventory();
+			for (int i = 0; i< t.size(); i++){
+
+				System.out.print("Topping ID: ");
+				System.out.print(t.get(i).getTopID());
+				System.out.print(" | Name: ");
+				System.out.print(t.get(i).getTopName());
+				System.out.print(" | Current Inv: ");
+				System.out.println(t.get(i).getCurINVT());
+
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	// Select an inventory item and add more to the inventory level to re-stock the

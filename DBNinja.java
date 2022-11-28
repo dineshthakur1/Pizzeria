@@ -280,8 +280,12 @@ public final class DBNinja {
 		ArrayList<Topping> topp = new ArrayList<Topping>();
 		while (rset.next()){
 			//create topping object
+			Topping t = new Topping(rset.getInt(1), rset.getString(2), rset.getDouble(3),
+					rset.getDouble(4),rset.getDouble(5), rset.getDouble(6),
+					rset.getDouble(7), rset.getDouble(8), rset.getInt(9),
+					rset.getInt(10));
 			//add it to the topping array
-			//topp.add();
+			topp.add(t);
 		}
 		
 		conn.close();
