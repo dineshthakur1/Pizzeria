@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static cpsc4620.DBNinja.getCustomerList;
+
 /*
  * This file is where the front end magic happens.
  * 
@@ -118,11 +120,9 @@ public class Menu {
 		/*
 		 * Simply print out all of the customers from the database. 
 		 */
+		getCustomerList();
 		
-		
-		
-		
-		
+
 		
 	}
 	

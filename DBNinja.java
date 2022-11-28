@@ -452,13 +452,19 @@ public final class DBNinja {
 		 *print in alphabetical order, so account for that as you see fit.
 		*/
 
+		//in progress
+		connect_to_db();
+		String query = "Select * From Customer;";
+		Statement stmt = conn.createStatement();
+		ResultSet resSet = stmt.executeQuery(query);
 
-		//TODO
-		
-		
-		
-		
-		
+		while(resSet.next())
+		{
+			Customer c = new Customer(resSet.getInt(1), resSet.getString(2),
+					resSet.getString(3), resSet.getString(4));
+			custs.add(c);
+		}
+		conn.close();
 		//DO NOT FORGET TO CLOSE YOUR CONNECTION
 		return custs;
 	}
