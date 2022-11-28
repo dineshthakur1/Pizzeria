@@ -264,26 +264,28 @@ public final class DBNinja {
 	
 	
 	public static ArrayList<Topping> getInventory() throws SQLException, IOException {
-		ArrayList<Topping> topp = new ArrayList<Topping>();
 		connect_to_db();
 		/*
-		 * This function actually returns the toppings. The toppings
-		 * should be returned in alphabetical order if you don't
-		 * plan on using a printInventory function
-		 */
-
-		String query = "Select t_Name from TOPPING ORDER BY t_Name ASC;";
+		* This function actually returns the toppings. The toppings
+		* should be returned in alphabetical order if you don't
+		* plan on using a printInventory function
+		*/
+		
+		String query = "Select * from TOPPING ORDER BY t_Name ASC;";
 		Statement stmt = conn.createStatement();
 		ResultSet rset = stmt.executeQuery(query);
-
+		
+		ArrayList<Topping> topp = new ArrayList<Topping>();
 		while (rset.next()){
-			topp = rset.getArray(1);
+			//create topping object
+			//add it to the topping array
+			//topp.add();
 		}
 		
 		conn.close();
 
 		//DO NOT FORGET TO CLOSE YOUR CONNECTION
-		return null;
+		return topp;
 	}
 
 
