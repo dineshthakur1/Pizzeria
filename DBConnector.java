@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class DBConnector {
 
-    // enter your user name here
+    // enter your username here
     private static String user = "root";
     // enter your password here
     private static String password = "password";
