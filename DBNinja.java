@@ -190,12 +190,16 @@ public final class DBNinja {
 		/*
 		 * This should add a customer to the database
 		 */
-		//TODO
-				
-		
-		
-		
-		
+		//insert into CUSTOMER VALUES(1, 'DineIn', 'Customer', '000-000-0000');
+
+		String query = "insert into CUSTOMER VALUES" + "(?,?,?,?);";
+		PreparedStatement ps = conn.prepareStatement(query);
+		ps.setInt(1,c.getCustID());
+		ps.setString(2, c.getFName());
+		ps.setString(3, c.getLName());
+		ps.setString(4, c.getPhone());
+		ps.executeUpdate();
+		conn.close();
 		//DO NOT FORGET TO CLOSE YOUR CONNECTION
 	}
 
@@ -280,8 +284,12 @@ public final class DBNinja {
 		ArrayList<Topping> topp = new ArrayList<Topping>();
 		while (rset.next()){
 			//create topping object
+			Topping t = new Topping(rset.getInt(1), rset.getString(2), rset.getDouble(3),
+					rset.getDouble(4),rset.getDouble(5), rset.getDouble(6),
+					rset.getDouble(7), rset.getDouble(8), rset.getInt(9),
+					rset.getInt(10));
 			//add it to the topping array
-			//topp.add();
+			topp.add(t);
 		}
 		
 		conn.close();

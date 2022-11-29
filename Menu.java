@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 import static cpsc4620.DBNinja.getCustomerList;
 
@@ -109,7 +110,7 @@ public class Menu {
 		 * return to menu
 		 */
 		
-		
+		//TODO
 		
 		System.out.println("Finished adding order...Returning to menu...");
 	}
@@ -132,8 +133,6 @@ public class Menu {
 		{
 			e.printStackTrace();
 		}
-
-
 	}
 	
 
@@ -151,9 +150,26 @@ public class Menu {
 		 * 
 		 * Once you get the name and phone number (and anything else your design might have) add it to the DB
 		 */
-		
-		
-
+		try {
+			String fName, lName, pNum;
+			ArrayList<Customer> a = DBNinja.getCustomerList();
+			Integer custID = a.size() + 1;
+			//reading in user data
+			Scanner readIn = new Scanner(System.in);
+			System.out.println("Please enter first name");
+			fName = readIn.nextLine();
+			System.out.println("Please enter last name");
+			lName = readIn.nextLine();
+			System.out.println("Please enter phone number, format: 123-456-7890");
+			pNum = readIn.nextLine();
+			//create customer
+			Customer c = new Customer(custID, fName, lName, pNum);
+			//System.out.println(c.toString());
+			DBNinja.addCustomer(c);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 
 	// View any orders that are not marked as completed
@@ -167,6 +183,8 @@ public class Menu {
 	 * When I enter the order, print out all the information about that order, not just the simplified view.
 	 * 
 	 */
+
+		//TODO
 		
 	}
 
@@ -183,7 +201,7 @@ public class Menu {
 		
 		
 		
-		
+		//TODO
 		
 		
 
@@ -193,13 +211,24 @@ public class Menu {
 	public static void ViewInventoryLevels() throws SQLException, IOException 
 	{
 		//print the inventory. I am really just concerned with the ID, the name, and the current inventory
-		
-		
-		
-		
-		
-		
-		
+		try
+		{
+			ArrayList<Topping> t = DBNinja.getInventory();
+			for (int i = 0; i< t.size(); i++){
+
+				System.out.print("Topping ID: ");
+				System.out.print(t.get(i).getTopID());
+				System.out.print(" | Name: ");
+				System.out.print(t.get(i).getTopName());
+				System.out.print(" | Current Inv: ");
+				System.out.println(t.get(i).getCurINVT());
+
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	// Select an inventory item and add more to the inventory level to re-stock the
@@ -212,7 +241,7 @@ public class Menu {
 		
 		
 		
-		
+		//TODO
 		
 		
 	}
@@ -240,7 +269,7 @@ public class Menu {
 		
 		
 		
-		
+		//TODO
 		
 		
 		return ret;
@@ -268,6 +297,7 @@ public class Menu {
 		 * 
 		 * You should ask the user which report to print
 		 */
+		//TODO
 	}
 
 }
