@@ -192,11 +192,13 @@ public final class DBNinja {
 		 */
 		//insert into CUSTOMER VALUES(1, 'DineIn', 'Customer', '000-000-0000');
 
-		String query = "insert into CUSTOMER VALUES(" + c.getCustID() + ",'" + c.getFName() +
-				"','" + c.getLName() + "','" + c.getPhone() +"');";
-		Statement stmt = conn.createStatement();
-		ResultSet rset = stmt.executeQuery(query);
-
+		String query = "insert into CUSTOMER VALUES" + "(?,?,?,?);";
+		PreparedStatement ps = conn.prepareStatement(query);
+		ps.setInt(1,c.getCustID());
+		ps.setString(2, c.getFName());
+		ps.setString(3, c.getLName());
+		ps.setString(4, c.getPhone());
+		ps.executeUpdate();
 		conn.close();
 		//DO NOT FORGET TO CLOSE YOUR CONNECTION
 	}
