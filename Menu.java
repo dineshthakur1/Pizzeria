@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 import static cpsc4620.DBNinja.getCustomerList;
 
@@ -149,9 +150,26 @@ public class Menu {
 		 * 
 		 * Once you get the name and phone number (and anything else your design might have) add it to the DB
 		 */
-		
-		
-
+		try {
+			String fName, lName, pNum;
+			ArrayList<Customer> a = DBNinja.getCustomerList();
+			Integer custID = a.size() + 1;
+			//reading in user data
+			Scanner readIn = new Scanner(System.in);
+			System.out.println("Please enter first name");
+			fName = readIn.nextLine();
+			System.out.println("Please enter last name");
+			lName = readIn.nextLine();
+			System.out.println("Please enter phone number, format: 123-456-7890");
+			pNum = readIn.nextLine();
+			//create customer
+			Customer c = new Customer(custID, fName, lName, pNum);
+			//System.out.println(c.toString());
+			DBNinja.addCustomer(c);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 
 	// View any orders that are not marked as completed
