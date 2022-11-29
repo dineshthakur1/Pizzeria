@@ -110,7 +110,7 @@ public class Menu {
 		 * return to menu
 		 */
 		
-		
+		//TODO
 		
 		System.out.println("Finished adding order...Returning to menu...");
 	}
@@ -183,6 +183,8 @@ public class Menu {
 	 * When I enter the order, print out all the information about that order, not just the simplified view.
 	 * 
 	 */
+
+		//TODO
 		
 	}
 
@@ -199,7 +201,7 @@ public class Menu {
 		
 		
 		
-		
+		//TODO
 		
 		
 
@@ -239,7 +241,7 @@ public class Menu {
 		
 		
 		
-		
+		//TODO
 		
 		
 	}
@@ -267,7 +269,7 @@ public class Menu {
 		
 		
 		
-		
+		//TODO
 		
 		
 		return ret;
@@ -295,6 +297,7 @@ public class Menu {
 		 * 
 		 * You should ask the user which report to print
 		 */
+		//TODO
 	}
 
 }
