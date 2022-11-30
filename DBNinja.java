@@ -231,18 +231,14 @@ public final class DBNinja {
 		/*
 		 * Adds toAdd amount of topping to topping t.
 		 */
-
-
-		String query = "Update TOPPING SET t_Inv = " + "?;";
+		double newAmt = toAdd + t.getCurINVT();
+		String query = "Update TOPPING SET t_Inv = ? WHERE t_ID = ?;";
 		PreparedStatement ps = conn.prepareStatement(query);
-		ps.setDouble(1,toAdd);
+		ps.setDouble(1,newAmt);
+		ps.setInt(2,t.getTopID());
 		ps.executeUpdate();
+
 		conn.close();
-		
-		
-		
-		
-		
 		//DO NOT FORGET TO CLOSE YOUR CONNECTION
 	}
 
@@ -250,7 +246,7 @@ public final class DBNinja {
 
 	public static void printInventory() throws SQLException, IOException {
 		connect_to_db();
-		
+
 		/*
 		 * I used this function to PRINT (not return) the inventory list.
 		 * When you print the inventory (either here or somewhere else)
