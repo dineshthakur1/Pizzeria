@@ -244,7 +244,9 @@ public class Menu {
 			System.out.println("How much inventory would you like to add?");
 			double topAmt = readIn.nextDouble();
 			//need to fix this to pass a topping not a topp id
-			//DBNinja.AddToInventory(topID, topAmt);
+			Topping t = DBNinja.getTopping(topID);
+			//System.out.println(t.toString());
+			DBNinja.AddToInventory(t, topAmt);
 
 		}
 		catch(Exception e)

@@ -233,7 +233,11 @@ public final class DBNinja {
 		 */
 
 
-		//TODO
+		String query = "Update TOPPING SET t_Inv = " + "?;";
+		PreparedStatement ps = conn.prepareStatement(query);
+		ps.setDouble(1,toAdd);
+		ps.executeUpdate();
+		conn.close();
 		
 		
 		
@@ -557,7 +561,21 @@ public final class DBNinja {
 		
 		//DO NOT FORGET TO CLOSE YOUR CONNECTION	
 	}
-	
+
+	public static Topping getTopping(Integer topID) throws SQLException, IOException
+	{
+		ArrayList<Topping> t = DBNinja.getInventory();
+		Topping desiredTopping = t.get(1);
+
+		for (int i = 0; i< t.size(); i++){
+			if (topID == t.get(i).getTopID()){
+				desiredTopping = t.get(i);
+				return desiredTopping;
+			}
+		}
+
+		return desiredTopping;
+	}
 	
 
 }
