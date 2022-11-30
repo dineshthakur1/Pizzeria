@@ -231,18 +231,14 @@ public final class DBNinja {
 		/*
 		 * Adds toAdd amount of topping to topping t.
 		 */
-
-
-		String query = "Update TOPPING SET t_Inv = " + "?;";
+		double newAmt = toAdd + t.getCurINVT();
+		String query = "Update TOPPING SET t_Inv = ? WHERE t_ID = ?;";
 		PreparedStatement ps = conn.prepareStatement(query);
-		ps.setDouble(1,toAdd);
+		ps.setDouble(1,newAmt);
+		ps.setInt(2,t.getTopID());
 		ps.executeUpdate();
+		t.setCurINVT((int)newAmt);
 		conn.close();
-		
-		
-		
-		
-		
 		//DO NOT FORGET TO CLOSE YOUR CONNECTION
 	}
 
@@ -250,7 +246,7 @@ public final class DBNinja {
 
 	public static void printInventory() throws SQLException, IOException {
 		connect_to_db();
-		
+
 		/*
 		 * I used this function to PRINT (not return) the inventory list.
 		 * When you print the inventory (either here or somewhere else)
@@ -264,13 +260,11 @@ public final class DBNinja {
 		ArrayList<Topping> t = DBNinja.getInventory();
 		System.out.println("ID\tName\t\t\t\t\t  Current Inv.");
 		for (int i = 0; i< t.size(); i++){
-			System.out.printf("%-3s %-25s %-30s\n",t.get(i).getTopID(),t.get(i).getTopName(),t.get(i).getCurINVT());
-			/*System.out.print(t.get(i).getTopID());
-			System.out.print("\t\t");
-			System.out.print(t.get(i).getTopName());
-			System.out.print("\t\t\t\t");
-			System.out.println(t.get(i).getCurINVT());*/
+			System.out.printf("%-3s %-25s %-30s\n",t.get(i).getTopID(),t.get(i).getTopName(),
+					t.get(i).getCurINVT());
 		}
+
+		conn.close();
 		//DO NOT FORGET TO CLOSE YOUR CONNECTION		
 	}
 	

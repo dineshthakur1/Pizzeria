@@ -247,6 +247,8 @@ public class Menu {
 			Topping t = DBNinja.getTopping(topID);
 			//System.out.println(t.toString());
 			DBNinja.AddToInventory(t, topAmt);
+			System.out.println(t.toString());
+			DBNinja.printInventory();
 
 		}
 		catch(Exception e)
