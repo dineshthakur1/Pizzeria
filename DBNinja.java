@@ -256,15 +256,16 @@ public final class DBNinja {
 		 * 
 		 * The topping list should also print in alphabetical order
 		 */
-		
-		//TODO
-		
-		
-		
-		
-		
-		
-		
+
+		ArrayList<Topping> t = DBNinja.getInventory();
+		System.out.println("ID\t\tName\t\t\t\tCurrent Inv.");
+		for (int i = 0; i< t.size(); i++){
+			System.out.print(t.get(i).getTopID());
+			System.out.print("\t\t");
+			System.out.print(t.get(i).getTopName());
+			System.out.print("\t\t\t\t");
+			System.out.println(t.get(i).getCurINVT());
+		}
 		//DO NOT FORGET TO CLOSE YOUR CONNECTION		
 	}
 	
