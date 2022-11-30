@@ -153,7 +153,7 @@ public class Menu {
 		try {
 			String fName, lName, pNum;
 			ArrayList<Customer> a = DBNinja.getCustomerList();
-			Integer custID = a.size() + 1;
+			Integer cusID = a.size() + 1;
 			//reading in user data
 			Scanner readIn = new Scanner(System.in);
 			System.out.println("Please enter first name");
@@ -163,7 +163,7 @@ public class Menu {
 			System.out.println("Please enter phone number, format: 123-456-7890");
 			pNum = readIn.nextLine();
 			//create customer
-			Customer c = new Customer(custID, fName, lName, pNum);
+			Customer c = new Customer(cusID, fName, lName, pNum);
 			//System.out.println(c.toString());
 			DBNinja.addCustomer(c);
 		}
@@ -238,12 +238,40 @@ public class Menu {
 		/*
 		 * This should print the current inventory and then ask the user which topping they want to add more to and how much to add
 		 */
-		
-		
-		
-		//TODO
-		
-		
+
+		try
+		{
+			ArrayList<Topping> t = DBNinja.getInventory();
+			for (int i = 0; i< t.size(); i++){
+
+				System.out.print("Topping ID: ");
+				System.out.print(t.get(i).getTopID());
+				System.out.print(" | Name: ");
+				System.out.print(t.get(i).getTopName());
+				System.out.print(" | Current Inv: ");
+				System.out.println(t.get(i).getCurINVT());
+
+			}
+			Boolean validTop = false;
+			Scanner readIn = new Scanner(System.in);
+			Integer topID = 0;
+			//loop until the user enters a topping with id between 1 and 17
+			while(validTop != true) {
+				System.out.println("Which topping would you like to add more of? Enter Topping ID");
+				topID = readIn.nextInt();
+				if (topID >= 1 && topID <= 17) validTop = true;
+			}
+			System.out.println("How much inventory would you like to add?");
+			double topAmt = readIn.nextDouble();
+			//need to fix this to pass a topping not a topp id
+			//DBNinja.AddToInventory(topID, topAmt);
+
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+
 	}
 
 	// A function that builds a pizza. Used in our add new order function
