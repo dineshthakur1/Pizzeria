@@ -309,7 +309,39 @@ public class Menu {
 		 * 
 		 * You should ask the user which report to print
 		 */
-		//TODO
+
+		try{
+			Scanner readIn = new Scanner(System.in);
+			boolean goodInput = false;
+			Integer userChoice = 0;
+			while (goodInput!=true){
+				System.out.println("Which report do you wish to print?");
+				System.out.println("1.) ToppingPopularity");
+				System.out.println("2.) ProfitByPizza");
+				System.out.println("3.) ProfitByOrderType");
+				userChoice = readIn.nextInt();
+				if (userChoice >= 1 && userChoice <= 3) goodInput = true;
+			}
+
+			System.out.println();
+			switch(userChoice){
+				case 1:
+					DBNinja.printToppingPopReport();
+					break;
+				case 2:
+					DBNinja.printProfitByPizzaReport();
+					break;
+				case 3:
+					DBNinja.printProfitByOrderType();
+					break;
+			}
+
+
+
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -280,14 +280,14 @@ public final class DBNinja {
 		String query = "Select * from TOPPING ORDER BY t_Name ASC;";
 		Statement stmt = conn.createStatement();
 		ResultSet rset = stmt.executeQuery(query);
-		
+
 		ArrayList<Topping> topp = new ArrayList<Topping>();
 		while (rset.next()){
 			//create topping object
-			Topping t = new Topping(rset.getInt(1), rset.getString(2), rset.getDouble(3),
-					rset.getDouble(4),rset.getDouble(5), rset.getDouble(6),
-					rset.getDouble(7), rset.getDouble(8), rset.getInt(9),
-					rset.getInt(10));
+			Topping t = new Topping(rset.getInt(1), rset.getString(2),
+					rset.getDouble(3), rset.getDouble(4),rset.getDouble(5),
+					rset.getDouble(6), rset.getDouble(7), rset.getDouble(8),
+					rset.getInt(9), rset.getInt(10));
 			//add it to the topping array
 			topp.add(t);
 		}
@@ -507,13 +507,17 @@ public final class DBNinja {
 		 * be in alphabetical order by name), just make sure it's readable.
 		 */
 
+		String query = "select * from toppingpopularity;";
+		Statement stmt = conn.createStatement();
+		ResultSet rset = stmt.executeQuery(query);
+		System.out.println("Topping\t\t\t\tToppingCount");
+		while (rset.next()){
+			System.out.printf("%-20s", rset.getString(1));
+			System.out.printf("%-10s", rset.getString(2));
+			System.out.println();
+		}
 
-		//TODO
-		
-		
-		
-		
-		
+		conn.close();
 		//DO NOT FORGET TO CLOSE YOUR CONNECTION
 	}
 	
@@ -527,11 +531,20 @@ public final class DBNinja {
 		 * 
 		 * I'm not picky about how they print, just make sure it's readable.
 		 */
-		
-		
-		//TODO
-		
-		
+
+		String query = "select * from profitbypizza;";
+		Statement stmt = conn.createStatement();
+		ResultSet rset = stmt.executeQuery(query);
+		System.out.println("Size\t\t\tCrust\t\t\tProfit\t\t\tLast Order Date");
+		while (rset.next()){
+			System.out.printf("%-16s", rset.getString(1));
+			System.out.printf("%-16s", rset.getString(2));
+			System.out.printf("%-16s", rset.getString(3));
+			System.out.printf("%-15s", rset.getString(4));
+			System.out.println();
+		}
+
+		conn.close();
 		
 		//DO NOT FORGET TO CLOSE YOUR CONNECTION
 	}
@@ -546,14 +559,22 @@ public final class DBNinja {
 		 * 
 		 * I'm not picky about how they print, just make sure it's readable.
 		 */
-		
-		
-		//TODO
-		
-		
-		
-		
-		
+
+
+		String query = "select * from profitbyordertype;";
+		Statement stmt = conn.createStatement();
+		ResultSet rset = stmt.executeQuery(query);
+		System.out.println("Customer Type       Order Month         Total Order Price   Total Order Cost    Profit");
+		while (rset.next()){
+			System.out.printf("%-20s", rset.getString(1));
+			System.out.printf("%-20s", rset.getString(2));
+			System.out.printf("%-20s", rset.getString(3));
+			System.out.printf("%-20s", rset.getString(4));
+			System.out.printf("%-20s", rset.getString(5));
+			System.out.println();
+		}
+
+		conn.close();
 		//DO NOT FORGET TO CLOSE YOUR CONNECTION	
 	}
 
