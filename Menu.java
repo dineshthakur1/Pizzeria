@@ -213,17 +213,7 @@ public class Menu {
 		//print the inventory. I am really just concerned with the ID, the name, and the current inventory
 		try
 		{
-			ArrayList<Topping> t = DBNinja.getInventory();
-			for (int i = 0; i< t.size(); i++){
-
-				System.out.print("Topping ID: ");
-				System.out.print(t.get(i).getTopID());
-				System.out.print(" | Name: ");
-				System.out.print(t.get(i).getTopName());
-				System.out.print(" | Current Inv: ");
-				System.out.println(t.get(i).getCurINVT());
-
-			}
+			DBNinja.printInventory();
 		}
 		catch(Exception e)
 		{
@@ -241,22 +231,12 @@ public class Menu {
 
 		try
 		{
-			ArrayList<Topping> t = DBNinja.getInventory();
-			for (int i = 0; i< t.size(); i++){
-
-				System.out.print("Topping ID: ");
-				System.out.print(t.get(i).getTopID());
-				System.out.print(" | Name: ");
-				System.out.print(t.get(i).getTopName());
-				System.out.print(" | Current Inv: ");
-				System.out.println(t.get(i).getCurINVT());
-
-			}
 			Boolean validTop = false;
 			Scanner readIn = new Scanner(System.in);
 			Integer topID = 0;
 			//loop until the user enters a topping with id between 1 and 17
 			while(validTop != true) {
+				DBNinja.printInventory();
 				System.out.println("Which topping would you like to add more of? Enter Topping ID");
 				topID = readIn.nextInt();
 				if (topID >= 1 && topID <= 17) validTop = true;
