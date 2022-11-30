@@ -310,6 +310,13 @@ public class Menu {
 		 * You should ask the user which report to print
 		 */
 		//TODO
+		try {
+			DBNinja.printToppingPopReport();
+
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 
 }

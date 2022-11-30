@@ -280,14 +280,14 @@ public final class DBNinja {
 		String query = "Select * from TOPPING ORDER BY t_Name ASC;";
 		Statement stmt = conn.createStatement();
 		ResultSet rset = stmt.executeQuery(query);
-		
+
 		ArrayList<Topping> topp = new ArrayList<Topping>();
 		while (rset.next()){
 			//create topping object
-			Topping t = new Topping(rset.getInt(1), rset.getString(2), rset.getDouble(3),
-					rset.getDouble(4),rset.getDouble(5), rset.getDouble(6),
-					rset.getDouble(7), rset.getDouble(8), rset.getInt(9),
-					rset.getInt(10));
+			Topping t = new Topping(rset.getInt(1), rset.getString(2),
+					rset.getDouble(3), rset.getDouble(4),rset.getDouble(5),
+					rset.getDouble(6), rset.getDouble(7), rset.getDouble(8),
+					rset.getInt(9), rset.getInt(10));
 			//add it to the topping array
 			topp.add(t);
 		}
@@ -507,13 +507,16 @@ public final class DBNinja {
 		 * be in alphabetical order by name), just make sure it's readable.
 		 */
 
+		String query = "CREATE VIEW ToppingPopularity \n" +
+				"AS \n" +
+				"SELECT T.t_Name AS Topping, COUNT(pt_TopID) + SUM(pt_IsExtra) AS ToppingCount \n" +
+				"FROM topping T INNER JOIN pizzatop PT ON T.t_ID = PT.pt_TopID GROUP BY T.t_ID " +
+				"ORDER BY ToppingCount DESC;";
 
-		//TODO
-		
-		
-		
-		
-		
+		Statement stmt = conn.createStatement();
+		//i believe the query is correct but not sure how to display?
+
+		conn.close();
 		//DO NOT FORGET TO CLOSE YOUR CONNECTION
 	}
 	
