@@ -262,13 +262,14 @@ public final class DBNinja {
 		 */
 
 		ArrayList<Topping> t = DBNinja.getInventory();
-		System.out.println("ID\t\tName\t\t\t\tCurrent Inv.");
+		System.out.println("ID\tName\t\t\t\t\t  Current Inv.");
 		for (int i = 0; i< t.size(); i++){
-			System.out.print(t.get(i).getTopID());
+			System.out.printf("%-3s %-25s %-30s\n",t.get(i).getTopID(),t.get(i).getTopName(),t.get(i).getCurINVT());
+			/*System.out.print(t.get(i).getTopID());
 			System.out.print("\t\t");
 			System.out.print(t.get(i).getTopName());
 			System.out.print("\t\t\t\t");
-			System.out.println(t.get(i).getCurINVT());
+			System.out.println(t.get(i).getCurINVT());*/
 		}
 		//DO NOT FORGET TO CLOSE YOUR CONNECTION		
 	}

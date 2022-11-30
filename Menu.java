@@ -156,11 +156,11 @@ public class Menu {
 			Integer cusID = a.size() + 1;
 			//reading in user data
 			Scanner readIn = new Scanner(System.in);
-			System.out.println("Please enter first name");
+			System.out.println("Please enter First name of Customer");
 			fName = readIn.nextLine();
-			System.out.println("Please enter last name");
+			System.out.println("Please enter Last name of Customer");
 			lName = readIn.nextLine();
-			System.out.println("Please enter phone number, format: 123-456-7890");
+			System.out.println("Please enter Phone number(XXX-XXX-XXXX)");
 			pNum = readIn.nextLine();
 			//create customer
 			Customer c = new Customer(cusID, fName, lName, pNum);
