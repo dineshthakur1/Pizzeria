@@ -231,12 +231,12 @@ public class Menu {
 
 		try
 		{
-			DBNinja.printInventory();
 			Boolean validTop = false;
 			Scanner readIn = new Scanner(System.in);
 			Integer topID = 0;
 			//loop until the user enters a topping with id between 1 and 17
 			while(validTop != true) {
+				DBNinja.printInventory();
 				System.out.println("Which topping would you like to add more of? Enter Topping ID");
 				topID = readIn.nextInt();
 				if (topID >= 1 && topID <= 17) validTop = true;
