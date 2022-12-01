@@ -216,11 +216,13 @@ public class Menu {
 					for (int i=0; i < orList.size(); ++i){
 						System.out.println(orList.get(i).toSimplePrint());
 					}
-					System.out.println("Which order would you like to see in detail? Enter the number:");
-					Integer option = readIn.nextInt();
-					DBNinja.getOrder(option);
+
 					break;
 			}
+
+			System.out.println("Which order would you like to see in detail? Enter the number:");
+			Integer option = readIn.nextInt();
+			DBNinja.getOrder(option);
 
 		}
 		catch(Exception e){
@@ -238,7 +240,8 @@ public class Menu {
 		 * and allow the user to choose which of the incomplete orders they wish to mark as complete
 		 * 
 		 */
-		
+		String noDate = "noDate";
+		ArrayList<Order> ordrs = DBNinja.getCurrentOrders(noDate);
 		
 		
 		//TODO
