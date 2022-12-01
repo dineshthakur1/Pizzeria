@@ -100,12 +100,36 @@ public final class DBNinja {
 		 * instance of topping usage to that bridge table if you have't accounted
 		 * for that somewhere else.
 		 */
-		//TODO
-		
-		
-		
-		
-		
+		String query = "insert into PIZZA VALUES" + "(?,?,?,?,?,?,?,?);";
+		PreparedStatement ps = conn.prepareStatement(query);
+		ps.setInt(1,p.getPizzaID());
+		ps.setString(2, p.getCrustType());
+		ps.setString(3, p.getSize());
+		ps.setBoolean(4, true);
+		ps.setString(5, p.getPizzaDate());
+		ps.setDouble(6,p.getCustPrice());
+		ps.setDouble(7,p.getBusPrice());
+		ps.setInt(8,p.getOrderID());
+		ps.executeUpdate();
+
+		//if (p.getSize() == "small")
+
+		for(int i = 0; i < p.getToppings().size(); ++i){
+			//Integer newAmt = p.getToppings().get(i).getCurINVT();
+			Integer newAmt = 10;
+			query = "insert into PIZZATOP VALUES " + "(?,?,?);" +
+					"UPDATE TOPPING SET t_Inv = " + "? where t_ID = ?;";
+			ps = conn.prepareStatement(query);
+			Integer toppID = p.getToppings().get(i).getTopID();
+			ps.setInt(1, toppID);
+			ps.setInt(2, p.getPizzaID());
+			ps.setBoolean(3, p.getIsDoubleArray()[toppID]);
+			ps.setInt(4, newAmt);
+			ps.setInt(5, toppID);
+			ps.executeUpdate();
+		}
+
+		conn.close();
 		//DO NOT FORGET TO CLOSE YOUR CONNECTION
 	}
 	
@@ -157,29 +181,38 @@ public final class DBNinja {
 		 * You might use this, you might not depending on where / how to want to update
 		 * this table
 		 */
-		//TODO
-		
-		
-		
-		
-		
+		if (d.isPercent() == true){
+			Double cPrice = p.getCustPrice();
+			Double percOff = d.getAmount() / 100;
+			Double discount = 1 - percOff;
+			p.setCustPrice(cPrice * discount);
+		}
+		else{
+			Double cPrice = p.getCustPrice();
+			p.setCustPrice(cPrice - d.getAmount());
+		}
 		//DO NOT FORGET TO CLOSE YOUR CONNECTION
 	}
 	
 	public static void useOrderDiscount(Order o, Discount d) throws SQLException, IOException
 	{
-		connect_to_db();
+		//connect_to_db();
 		/*
 		 * Helper function I used to update the pizza-discount bridge table. 
 		 * You might use this, you might not depending on where / how to want to update
 		 * this table
 		 */
-		//TODO
-		
-		
-		
-		
-		
+		if (d.isPercent() == true){
+			Double cPrice = o.getCustPrice();
+			Double percOff = d.getAmount() / 100;
+			Double discount = 1 - percOff;
+			o.setCustPrice(cPrice * discount);
+		}
+		else{
+			Double cPrice = o.getCustPrice();
+			o.setCustPrice(cPrice - d.getAmount());
+		}
+
 		//DO NOT FORGET TO CLOSE YOUR CONNECTION
 	}
 	
@@ -358,7 +391,7 @@ public final class DBNinja {
 		
 		
 		//TODO
-		
+		//DONT NEED THIS
 		
 		
 		
@@ -376,7 +409,7 @@ public final class DBNinja {
 		
 		
 		//TODO
-		
+		//I DONT THINK WE NEED THIS
 		
 		
 		
@@ -467,15 +500,20 @@ public final class DBNinja {
 		ArrayList<Discount> discs = new ArrayList<Discount>();
 		connect_to_db();
 		//returns a list of all the discounts.
-		
-		
-		//TODO
-		
-		
-		
-		
-		
-		
+		String query = "select * from discount;";
+		Statement stmt = conn.createStatement();
+		ResultSet rset = stmt.executeQuery(query);
+		while (rset.next()){
+			Integer orderId = rset.getInt(1);
+			String dName = rset.getString(2);
+			Double dAmt = rset.getDouble(3);
+			Boolean isPerc = rset.getBoolean(4);
+
+			Discount d = new Discount(orderId, dName, dAmt, isPerc);
+			discs.add(d);
+		}
+
+		conn.close();
 		//DO NOT FORGET TO CLOSE YOUR CONNECTION
 		return discs;
 	}
@@ -516,6 +554,7 @@ public final class DBNinja {
 		
 		
 		//TODO
+		//I dont think we need this
 		
 		
 		

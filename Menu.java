@@ -158,10 +158,18 @@ public class Menu {
 
 				System.out.println("Now tell us what crust would you like for your Pizza : \n1.Thin\n2.Original\n3.Pan\n4.Gluten-Free \nPlease enter an menu option[1-4]:");
 				Integer pizzaCrust = Integer.parseInt(reader.readLine());
+				String crust = "";
+				if (pizzaCrust == 1) crust = "Thin";
+				else if (pizzaCrust == 2) crust = "Original";
+				else if (pizzaCrust == 3) crust = "Pan";
+				else if (pizzaCrust == 4) crust = "X-Large";
 
+				Date d = new Date();
+				Integer year = d.getYear();
 				String pizzaTimeStamp = getTimeStamp();
+				Integer orderId = (DBNinja.getCurrentOrders("noDate").size()) + 1;
 
-				Pizza pizza = new Pizza(orderId, Pizza.getPizzaCrustFromInt(pizzaCrust), Pizza.getPizzaSizeFromInt(pizzaSize), pizzaTimeStamp);
+				Pizza pizza = new Pizza(orderId, crust, Pizza.getPizzaSizeFromInt(pizzaSize), pizzaTimeStamp);
 
 				DBNinja.addPizza(pizza);
 
