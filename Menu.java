@@ -128,6 +128,9 @@ public class Menu {
 		else if(choice=='n')
 		{
 			EnterCustomer();
+			viewCustomers();
+			System.out.println("Select the CustID: ");
+			cID = Integer.parseInt(reader.readLine());
 			System.out.println("Enter Order Type : \n1.Dine-In\n2.Pick-Up\n3.Delivery\nEnter option number: ");
 			Integer orderCh = Integer.parseInt(reader.readLine());
 			switch(orderCh)
@@ -146,6 +149,131 @@ public class Menu {
 				default:
 					System.out.println("Invalid option");
 			}
+			System.out.println("#######################---PIZZA MENU---#######################");
+			boolean pizzaContd= true;
+			while(pizzaContd)
+			{
+				System.out.println("Let's decide, what size of pizza would you like: \n1.Small\n2.Medium\n3.Large\n4.Extra_Large \nPlease enter an menu option[1-4]:");
+				Integer pizzaSize = Integer.parseInt(reader.readLine());
+
+				System.out.println("Now tell us what crust would you like for your Pizza : \n1.Thin\n2.Original\n3.Pan\n4.Gluten-Free \nPlease enter an menu option[1-4]:");
+				Integer pizzaCrust = Integer.parseInt(reader.readLine());
+
+				String pizzaTimeStamp = getTimeStamp();
+
+				Pizza pizza = new Pizza(orderId, Pizza.getPizzaCrustFromInt(pizzaCrust), Pizza.getPizzaSizeFromInt(pizzaSize), pizzaTimeStamp);
+
+				DBNinja.addPizza(pizza);
+
+				Boolean wantMoreTopping = false;
+
+				do {
+
+					ViewInventoryLevels();
+					System.out.println("What topping would you like to add:");
+
+					Integer toppingId = Integer.parseInt(reader.readLine());
+
+					if (-1 == toppingId) {
+						wantMoreTopping = false;
+						break;
+					} else {
+						Topping topping = new Topping(toppingId, pizzaSize, pizza.getPizzaID());
+
+						updatingInventoryForPizza(topping);
+
+						pizza.addToppings(topping);
+
+					}
+
+					System.out.println("Do you want to add another topping : type y/n:");
+					wantMoreTopping = "y".equals(reader.readLine());
+
+				} while (wantMoreTopping);
+
+
+				System.out.println("Do you want to add pizza Discount?[y/n]");
+
+				Boolean addMoreDiscount = "y".equals(reader.readLine());
+
+				//adding discount
+				while (addMoreDiscount) {
+
+					ArrayList<Discount> discounts = DBNinja.getDiscountList();
+
+					for (Discount discount : discounts) {
+						System.out.println(discount.toString());
+					}
+
+					System.out.println("Please enter a discount id or -1 if you don't want to add a discount");
+
+					Integer discountId = Integer.parseInt(reader.readLine());
+
+					if (-1 == discountId) {
+						break;
+					} else {
+
+						Discount pizzaDiscount = new Discount(discountId);
+						DBNinja.updateDiscountDetails(pizzaDiscount);
+						DBNinja.insertInPizzaDiscount(pizza.getPizzaID(), discountId);
+
+						pizza.addDiscounts(pizzaDiscount);
+
+					}
+
+					System.out.println("Do you want to add another discount?[y/n]");
+					addMoreDiscount = "y".equals(reader.readLine());
+
+				}
+
+				DBNinja.updatePizzaDetails(pizza);
+
+				orderTotalCost += pizza.getPizzaCost();
+				orderTotalPrice += pizza.getPizzaPrice();
+
+				System.out.println("Would you like to add another pizza?[y/n]");
+
+				pizzaContd = "y".equals(reader.readLine());
+			}
+
+			order.setCustPrice(orderTotalPrice);
+			order.setBusPrice(orderTotalCost);
+
+			System.out.println("Do you want to add order Discount?[y/n]");
+
+			Boolean addMoreDiscount = "y".equals(reader.readLine());
+
+			//adding discount
+			while (addMoreDiscount) {
+
+				ArrayList<Discount> discounts = DBNinja.getDiscountList();
+
+				for (Discount discount : discounts) {
+					System.out.println(discount.toString());
+				}
+
+				System.out.println("Please enter a discount id or -1 if you don't want to add a discount");
+
+				Integer discountId = Integer.parseInt(reader.readLine());
+
+				if (-1 == discountId) {
+					break;
+				} else {
+
+					//Discount pizzaDiscount = new Discount(discountId);
+					//DBNinja.updateDiscountDetails(pizzaDiscount);
+					//DBNinja.insertInOrderDiscount(order.getOrderID(), discountId);
+
+					//order.addDiscounts(pizzaDiscount);
+
+				}
+
+				System.out.println("Do you want to add another discount : type y/n:");
+				addMoreDiscount = "y".equals(reader.readLine());
+
+			}
+
+			//DBNinja.updateOrderDetails(order);
 
 
 		}
