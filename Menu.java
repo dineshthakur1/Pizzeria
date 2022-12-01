@@ -184,8 +184,36 @@ public class Menu {
 	 * 
 	 */
 
-		//TODO
-		
+		try {
+			char userChoice = 'x';
+			boolean goodChoice = false;
+			Scanner readIn = new Scanner(System.in);
+			while(goodChoice != true) {
+				//reading in user data
+				System.out.println("Would you like to:");
+				System.out.println("(a) display all orders");
+				System.out.println("(b) display orders since a specific date");
+				userChoice = readIn.next().charAt(0);
+				if (userChoice == 'a' || userChoice == 'b') goodChoice = true;
+			}
+
+			switch(userChoice){
+				case 'a':
+					//print all orders
+					break;
+				case 'b':
+					System.out.println("What is the date you want to restrict by? (FORMAT = YYY-MM-DD)");
+					String sortYear = readIn.nextLine();
+					//print orders that occurred after the sortYear
+					break;
+			}
+
+			System.out.println("Which order would you like to see in detail? Enter the number:");
+
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 
 	
