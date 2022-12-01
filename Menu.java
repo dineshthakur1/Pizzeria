@@ -110,8 +110,7 @@ public class Menu {
 		 * 
 		 * return to menu
 		 */
-		
-		//TODO
+
 		
 		System.out.println("Finished adding order...Returning to menu...");
 	}

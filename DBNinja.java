@@ -213,12 +213,13 @@ public final class DBNinja {
 		 * for this, or maybe a completed time timestamp. However you have it.
 		 */
 
-		String query = "Update ORDERS SET o_IsComplete = true WHERE o_OrderID = ?;";
+		String query = "Update ORDERS SET o_IsComplete = 1 WHERE o_OrderID = ?;";
 		PreparedStatement ps = conn.prepareStatement(query);
 		Integer oId = o.getOrderID();
 		System.out.println("wabbajack"+oId);
-		ps.setInt(1,o.getOrderID());
+		ps.setInt(1,oId);
 		o.setIsComplete(1);
+		ps.executeUpdate();
 
 		conn.close();
 		//DO NOT FORGET TO CLOSE YOUR CONNECTION
