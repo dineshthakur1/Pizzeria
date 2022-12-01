@@ -211,15 +211,15 @@ public final class DBNinja {
 		 * add code to mark an order as complete in the DB. You may have a boolean field
 		 * for this, or maybe a completed time timestamp. However you have it.
 		 */
-		
-		//TODO
 
+		String query = "Update ORDERS SET o_IsComplete = true WHERE o_OrderID = ?;";
+		PreparedStatement ps = conn.prepareStatement(query);
+		Integer oId = o.getOrderID();
+		System.out.println("wabbajack"+oId);
+		ps.setInt(1,o.getOrderID());
+		o.setIsComplete(1);
 
-		
-		
-		
-		
-		
+		conn.close();
 		//DO NOT FORGET TO CLOSE YOUR CONNECTION
 	}
 
@@ -231,13 +231,14 @@ public final class DBNinja {
 		/*
 		 * Adds toAdd amount of topping to topping t.
 		 */
+
 		double newAmt = toAdd + t.getCurINVT();
+		t.setCurINVT((int)newAmt);
 		String query = "Update TOPPING SET t_Inv = ? WHERE t_ID = ?;";
 		PreparedStatement ps = conn.prepareStatement(query);
 		ps.setDouble(1,newAmt);
 		ps.setInt(2,t.getTopID());
 		ps.executeUpdate();
-		t.setCurINVT((int)newAmt);
 		conn.close();
 		//DO NOT FORGET TO CLOSE YOUR CONNECTION
 	}
@@ -619,7 +620,7 @@ public final class DBNinja {
 		return desiredTopping;
 	}
 
-	public static void getOrder(Integer orderID) throws SQLException, IOException
+	public static Order getOrder(Integer orderID) throws SQLException, IOException
 	{
 		connect_to_db();
 		String query = "Select * from ORDERS where o_OrderID = " + orderID + ";";
@@ -640,26 +641,23 @@ public final class DBNinja {
 			Integer tempCID = rset.getInt(8);
 
 			Order o = new Order(tempID, tempCID, tempType, tempDate, tempPrice, tempCost, tempIsComplete);
-			if (tempType.equals("delivery")) print = o.toString();
-			else{
-				System.out.print(o.toString());
-			}
 			conn.close();
+			return o;
 		}
+		return null;
+	}
 
+	public static void printAddress(String print, Integer orderID) throws SQLException, IOException{
 		connect_to_db();
-		if (tempType.equals("delivery")){
-			String query2 = "Select * from delivery where de_OrderID = " + orderID + ";";
-			Statement stmt2 = conn.createStatement();
-			ResultSet rset2 = stmt2.executeQuery(query2);
 
-			while(rset2.next()){
-				String addr = rset2.getString(2);
-				System.out.println(print + " | Delivered to: " + addr);
-			}
+		String query2 = "Select * from delivery where de_OrderID = " + orderID + ";";
+		Statement stmt2 = conn.createStatement();
+		ResultSet rset2 = stmt2.executeQuery(query2);
 
+		while(rset2.next()){
+			String addr = rset2.getString(2);
+			System.out.println(print + " | Delivered to: " + addr);
 		}
-
 		conn.close();
 	}
 }
