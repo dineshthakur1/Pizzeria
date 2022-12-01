@@ -299,7 +299,7 @@ public final class DBNinja {
 	}
 
 
-	public static ArrayList<Order> getCurrentOrders() throws SQLException, IOException {
+	public static ArrayList<Order> getCurrentOrders(String filterDate) throws SQLException, IOException {
 		connect_to_db();
 		/*
 		 * This function should return an arraylist of all of the orders.
@@ -311,19 +311,32 @@ public final class DBNinja {
 		 * these orders should print in order from newest to oldest.
 		 */
 
+
 		ArrayList<Order> oList = new ArrayList<Order>();
 
 		connect_to_db();
-		String query = "Select * From ORDERS order by o_Date DESC;";
+		String query = "";
+		if (filterDate == "noDate"){
+			query = "Select * From ORDERS order by o_Date DESC;";
+		}
+		else{
+			query = "Select * FROM ORDERS where o_Date >= '" + filterDate + "' order by o_Date DESC;";
+		}
 		Statement stmt = conn.createStatement();
 		ResultSet rset = stmt.executeQuery(query);
 
 		while(rset.next())
 		{
-			//String orderTime = rset.getString(5);
-			Order o = new Order(rset.getInt(1), rset.getInt(8),
-					rset.getString(2), rset.getString(6), rset.getDouble(3),
-					rset.getDouble(4), rset.getInt(7));
+			Integer tempID = rset.getInt(1);
+			String tempType = rset.getString(2);
+			Double tempPrice = rset.getDouble(3);
+			Double tempCost = rset.getDouble(4);
+			String orderTime = rset.getString(5);
+			String tempDate = rset.getString(6);
+			Integer tempIsComplete = rset.getInt(7);
+			Integer tempCID = rset.getInt(8);
+
+			Order o = new Order(tempID, tempCID, tempType, tempDate, tempPrice, tempCost, tempIsComplete);
 			oList.add(o);
 		}
 		conn.close();
@@ -414,7 +427,7 @@ public final class DBNinja {
 		 */
 		connect_to_db();
 		String ret = "";
-		String query = "Select FName, LName From Customer WHERE CustID=" + CustID + ";";
+		String query = "Select c_FirstName, c_LastName From Customer WHERE c_CustID=" + CustID + ";";
 		Statement stmt = conn.createStatement();
 		ResultSet rset = stmt.executeQuery(query);
 		
@@ -604,6 +617,40 @@ public final class DBNinja {
 		}
 
 		return desiredTopping;
+	}
+
+	public static void getOrder(Integer orderID) throws SQLException, IOException
+	{
+		String query = "Select * from ORDERS where o_OrderID = " + orderID + ";";
+		Statement stmt = conn.createStatement();
+		ResultSet rset = stmt.executeQuery(query);
+		String tempType = "";
+
+		while(rset.next())
+		{
+			Integer tempID = rset.getInt(1);
+			tempType = rset.getString(2);
+			Double tempPrice = rset.getDouble(3);
+			Double tempCost = rset.getDouble(4);
+			String orderTime = rset.getString(5);
+			String tempDate = rset.getString(6);
+			Integer tempIsComplete = rset.getInt(7);
+			Integer tempCID = rset.getInt(8);
+
+			Order o = new Order(tempID, tempCID, tempType, tempDate, tempPrice, tempCost, tempIsComplete);
+			o.toString();
+			System.out.print("OrderID= ");
+			System.out.print(tempID);
+			System.out.print("Date Placed");
+
+
+		}
+
+		String query2 = "Select * from " + tempType + " where o_OrderID = " + orderID + ";";
+		Statement stmt2 = conn.createStatement();
+		ResultSet rset2 = stmt.executeQuery(query2);
+
+
 	}
 	
 

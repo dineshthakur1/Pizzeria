@@ -188,6 +188,7 @@ public class Menu {
 			char userChoice = 'x';
 			boolean goodChoice = false;
 			Scanner readIn = new Scanner(System.in);
+
 			while(goodChoice != true) {
 				//reading in user data
 				System.out.println("Would you like to:");
@@ -196,21 +197,30 @@ public class Menu {
 				userChoice = readIn.next().charAt(0);
 				if (userChoice == 'a' || userChoice == 'b') goodChoice = true;
 			}
+			String fDate = "noDate";
 
 			switch(userChoice){
 				case 'a':
 					//print all orders
-					ArrayList<Order> oList = DBNinja.getCurrentOrders();
-					System.out.println(oList.toString());
+					ArrayList<Order> oList = DBNinja.getCurrentOrders(fDate);
+					//System.out.println(oList.toString());
+					for (int i=0; i < oList.size(); ++i){
+						System.out.println(oList.get(i).toString());
+					}
 					break;
 				case 'b':
-					System.out.println("What is the date you want to restrict by? (FORMAT = YYY-MM-DD)");
-					String sortYear = readIn.nextLine();
-					//print orders that occurred after the sortYear
+					System.out.println("What is the date you want to restrict by? (FORMAT = YYYY-MM-DD)");
+					readIn.nextLine();
+					String d = readIn.next();
+					ArrayList<Order> orList = DBNinja.getCurrentOrders(d);
+					for (int i=0; i < orList.size(); ++i){
+						System.out.println(orList.get(i).toString());
+					}
+					System.out.println("Which order would you like to see in detail? Enter the number:");
+					Integer option = readIn.nextInt();
 					break;
 			}
 
-			System.out.println("Which order would you like to see in detail? Enter the number:");
 		}
 		catch(Exception e){
 			e.printStackTrace();
