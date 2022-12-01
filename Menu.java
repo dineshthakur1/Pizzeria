@@ -110,8 +110,50 @@ public class Menu {
 		 * 
 		 * return to menu
 		 */
+		//Order o1 = new Order();
+		Integer cID;
+		String orderType;
+		Integer tableNo;
+		String address;
+		double orderTotalCost = 0;
+		double orderTotalPrice = 0;
+		System.out.println("Is this order for Existing Customer?[y/n]");
+		char choice = (char)reader.read();
+		if(choice=='y')
+		{
+			viewCustomers();
+			System.out.println("Select the CustID: ");
+			cID = Integer.parseInt(reader.readLine());
+		}
+		else if(choice=='n')
+		{
+			EnterCustomer();
+			System.out.println("Enter Order Type : \n1.Dine-In\n2.Pick-Up\n3.Delivery\nEnter option number: ");
+			Integer orderCh = Integer.parseInt(reader.readLine());
+			switch(orderCh)
+			{
+				case 1:
+					orderType="dinein";
+					System.out.println("Enter table number: ");
+					tableNo = Integer.parseInt(reader.readLine());
 
-		
+				case 2:
+					orderType="pickup";
+				case 3:
+					orderType="delivery";
+					System.out.println("Enter address: ");
+					address = reader.readLine();
+				default:
+					System.out.println("Invalid option");
+			}
+
+
+		}
+		else
+		{
+			System.out.println("Invalid option");
+		}
+
 		System.out.println("Finished adding order...Returning to menu...");
 	}
 	
@@ -312,7 +354,7 @@ public class Menu {
 			//System.out.println(t.toString());
 			DBNinja.AddToInventory(t, topAmt);
 			System.out.println(t.toString());
-			DBNinja.printInventory();
+			//DBNinja.printInventory();
 
 		}
 		catch(Exception e)
