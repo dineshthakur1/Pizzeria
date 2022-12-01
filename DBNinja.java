@@ -621,10 +621,12 @@ public final class DBNinja {
 
 	public static void getOrder(Integer orderID) throws SQLException, IOException
 	{
+		connect_to_db();
 		String query = "Select * from ORDERS where o_OrderID = " + orderID + ";";
 		Statement stmt = conn.createStatement();
 		ResultSet rset = stmt.executeQuery(query);
 		String tempType = "";
+		String print = "";
 
 		while(rset.next())
 		{
@@ -638,20 +640,26 @@ public final class DBNinja {
 			Integer tempCID = rset.getInt(8);
 
 			Order o = new Order(tempID, tempCID, tempType, tempDate, tempPrice, tempCost, tempIsComplete);
-			o.toString();
-			System.out.print("OrderID= ");
-			System.out.print(tempID);
-			System.out.print("Date Placed");
+			if (tempType.equals("delivery")) print = o.toString();
+			else{
+				System.out.print(o.toString());
+			}
+			conn.close();
+		}
 
+		connect_to_db();
+		if (tempType.equals("delivery")){
+			String query2 = "Select * from delivery where de_OrderID = " + orderID + ";";
+			Statement stmt2 = conn.createStatement();
+			ResultSet rset2 = stmt2.executeQuery(query2);
+
+			while(rset2.next()){
+				String addr = rset2.getString(2);
+				System.out.println(print + " | Delivered to: " + addr);
+			}
 
 		}
 
-		String query2 = "Select * from " + tempType + " where o_OrderID = " + orderID + ";";
-		Statement stmt2 = conn.createStatement();
-		ResultSet rset2 = stmt.executeQuery(query2);
-
-
+		conn.close();
 	}
-	
-
 }

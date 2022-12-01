@@ -205,7 +205,7 @@ public class Menu {
 					ArrayList<Order> oList = DBNinja.getCurrentOrders(fDate);
 					//System.out.println(oList.toString());
 					for (int i=0; i < oList.size(); ++i){
-						System.out.println(oList.get(i).toString());
+						System.out.println(oList.get(i).toSimplePrint());
 					}
 					break;
 				case 'b':
@@ -214,10 +214,11 @@ public class Menu {
 					String d = readIn.next();
 					ArrayList<Order> orList = DBNinja.getCurrentOrders(d);
 					for (int i=0; i < orList.size(); ++i){
-						System.out.println(orList.get(i).toString());
+						System.out.println(orList.get(i).toSimplePrint());
 					}
 					System.out.println("Which order would you like to see in detail? Enter the number:");
 					Integer option = readIn.nextInt();
+					DBNinja.getOrder(option);
 					break;
 			}
 
