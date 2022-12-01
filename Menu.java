@@ -1,4 +1,5 @@
 package cpsc4620;
+//By Luke Smith and Dinesh Thakur
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -222,7 +223,13 @@ public class Menu {
 
 			System.out.println("Which order would you like to see in detail? Enter the number:");
 			Integer option = readIn.nextInt();
-			DBNinja.getOrder(option);
+			Order o = DBNinja.getOrder(option);
+			if (o.getOrderType().equals("delivery")){
+				DBNinja.printAddress(o.toString(), option);
+			}
+			else{
+				System.out.println(o.toString());
+			}
 
 		}
 		catch(Exception e){
@@ -240,13 +247,28 @@ public class Menu {
 		 * and allow the user to choose which of the incomplete orders they wish to mark as complete
 		 * 
 		 */
-		String noDate = "noDate";
-		ArrayList<Order> ordrs = DBNinja.getCurrentOrders(noDate);
-		
-		
-		//TODO
-		
-		
+		try {
+			String noDate = "noDate";
+			ArrayList<Order> ordrs = DBNinja.getCurrentOrders(noDate);
+			Integer counter = 0;
+			for (int i = 0; i < ordrs.size(); ++i) {
+				if (ordrs.get(i).getIsComplete() == 0) {
+					System.out.println(ordrs.get(i).toSimplePrint());
+					counter++;
+				}
+			}
+			if (counter == 0) System.out.println("There are no open orders currently... returning to menu...");
+			else {
+				Scanner readIn = new Scanner(System.in);
+				System.out.println("Which order would you like to mark as complete? Enter Order ID ");
+				Integer userChoice = readIn.nextInt();
+				Order o = DBNinja.getOrder(userChoice);
+				DBNinja.CompleteOrder(o);
+			}
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
 
 	}
 

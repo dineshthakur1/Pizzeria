@@ -1,4 +1,5 @@
 package cpsc4620;
+//By Luke Smith and Dinesh Thakur
 
 
 public class Customer {
