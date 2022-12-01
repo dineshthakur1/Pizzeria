@@ -311,12 +311,25 @@ public final class DBNinja {
 		 * these orders should print in order from newest to oldest.
 		 */
 
-		//TODO
+		ArrayList<Order> oList = new ArrayList<Order>();
 
+		connect_to_db();
+		String query = "Select * From ORDERS order by o_Date DESC;";
+		Statement stmt = conn.createStatement();
+		ResultSet rset = stmt.executeQuery(query);
 
-		
+		while(rset.next())
+		{
+			//String orderTime = rset.getString(5);
+			Order o = new Order(rset.getInt(1), rset.getInt(8),
+					rset.getString(2), rset.getString(6), rset.getDouble(3),
+					rset.getDouble(4), rset.getInt(7));
+			oList.add(o);
+		}
+		conn.close();
+
 		//DO NOT FORGET TO CLOSE YOUR CONNECTION
-		return null;
+		return oList;
 	}
 	
 	public static ArrayList<Order> sortOrders(ArrayList<Order> list)

@@ -200,6 +200,8 @@ public class Menu {
 			switch(userChoice){
 				case 'a':
 					//print all orders
+					ArrayList<Order> oList = DBNinja.getCurrentOrders();
+					System.out.println(oList.toString());
 					break;
 				case 'b':
 					System.out.println("What is the date you want to restrict by? (FORMAT = YYY-MM-DD)");
@@ -209,7 +211,6 @@ public class Menu {
 			}
 
 			System.out.println("Which order would you like to see in detail? Enter the number:");
-
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -363,9 +364,6 @@ public class Menu {
 					DBNinja.printProfitByOrderType();
 					break;
 			}
-
-
-
 		}
 		catch(Exception e){
 			e.printStackTrace();
