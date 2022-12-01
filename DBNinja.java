@@ -284,7 +284,7 @@ public final class DBNinja {
 		Statement stmt = conn.createStatement();
 		ResultSet rset = stmt.executeQuery(query);
 
-		ArrayList<Topping> topp = new ArrayList<Topping>();
+		ArrayList<Topping> topping = new ArrayList<Topping>();
 		while (rset.next()){
 			//create topping object
 			Topping t = new Topping(rset.getInt(1), rset.getString(2),
@@ -292,13 +292,13 @@ public final class DBNinja {
 					rset.getDouble(6), rset.getDouble(7), rset.getDouble(8),
 					rset.getInt(9), rset.getInt(10));
 			//add it to the topping array
-			topp.add(t);
+			topping.add(t);
 		}
 		
 		conn.close();
 
 		//DO NOT FORGET TO CLOSE YOUR CONNECTION
-		return topp;
+		return topping;
 	}
 
 
