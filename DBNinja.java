@@ -358,7 +358,7 @@ public final class DBNinja {
 		
 		
 		//TODO
-		
+		//DONT NEED THIS
 		
 		
 		
@@ -376,7 +376,7 @@ public final class DBNinja {
 		
 		
 		//TODO
-		
+		//I DONT THINK WE NEED THIS
 		
 		
 		
@@ -467,15 +467,20 @@ public final class DBNinja {
 		ArrayList<Discount> discs = new ArrayList<Discount>();
 		connect_to_db();
 		//returns a list of all the discounts.
-		
-		
-		//TODO
-		
-		
-		
-		
-		
-		
+		String query = "select * from discount;";
+		Statement stmt = conn.createStatement();
+		ResultSet rset = stmt.executeQuery(query);
+		while (rset.next()){
+			Integer orderId = rset.getInt(1);
+			String dName = rset.getString(2);
+			Double dAmt = rset.getDouble(3);
+			Boolean isPerc = rset.getBoolean(4);
+
+			Discount d = new Discount(orderId, dName, dAmt, isPerc);
+			discs.add(d);
+		}
+
+		conn.close();
 		//DO NOT FORGET TO CLOSE YOUR CONNECTION
 		return discs;
 	}
