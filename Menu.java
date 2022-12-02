@@ -115,6 +115,7 @@ public class Menu {
 		String orderType;
 		Integer tableNo;
 		String address;
+		String pSize, pCrust;
 		double orderTotalCost = 0;
 		double orderTotalPrice = 0;
 		System.out.println("Is this order for Existing Customer?[y/n]");
@@ -153,12 +154,39 @@ public class Menu {
 			boolean pizzaContd= true;
 			while(pizzaContd)
 			{
-				System.out.println("Let's decide, what size of pizza would you like: \n1.Small\n2.Medium\n3.Large\n4.Extra_Large \nPlease enter an menu option[1-4]:");
+				System.out.println("Let's decide, what size of pizza would you like: \n1.Small\n2.Medium\n3.Large\n4.Extra_Large \nPlease enter corresponding number[1-4]:");
 				Integer pizzaSize = Integer.parseInt(reader.readLine());
-
-				System.out.println("Now tell us what crust would you like for your Pizza : \n1.Thin\n2.Original\n3.Pan\n4.Gluten-Free \nPlease enter an menu option[1-4]:");
+				switch(orderCh)
+				{
+					case 1:
+						pSize="Small";
+					case 2:
+						pSize="Medium";
+					case 3:
+						pSize="Large";
+					case 4:
+						pSize="X-Large";
+					default:
+						System.out.println("Invalid option");
+				}
+				System.out.println("Now tell us what crust would you like for your Pizza : \n1.Thin\n2.Original\n3.Pan\n4.Gluten-Free \nPlease enter corresponding number[1-4]:");
 				Integer pizzaCrust = Integer.parseInt(reader.readLine());
+				switch(orderCh)
+				{
+					case 1:
+						orderType="dinein";
+						System.out.println("Enter table number: ");
+						tableNo = Integer.parseInt(reader.readLine());
 
+					case 2:
+						orderType="pickup";
+					case 3:
+						orderType="delivery";
+						System.out.println("Enter address: ");
+						address = reader.readLine();
+					default:
+						System.out.println("Invalid option");
+				}
 				String pizzaTimeStamp = getTimeStamp();
 
 				Pizza pizza = new Pizza(orderId, Pizza.getPizzaCrustFromInt(pizzaCrust), Pizza.getPizzaSizeFromInt(pizzaSize), pizzaTimeStamp);
