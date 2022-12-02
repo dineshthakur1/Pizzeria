@@ -704,4 +704,36 @@ public final class DBNinja {
 		}
 		conn.close();
 	}
+
+	public static Double getBaseCost(String size, String type) throws SQLException, IOException{
+		connect_to_db();
+		String query = "Select * from BASEPRICE where pr_Size = '" + size + "' and pr_Crust = '" + type + "';";
+		Statement stmt = conn.createStatement();
+		ResultSet rset = stmt.executeQuery(query);
+		Double cost = 0.0;
+
+		while(rset.next())
+		{
+			cost = rset.getDouble(4);
+		}
+
+		conn.close();
+		return cost;
+	}
+
+	public static Double getBasePrice(String size, String type) throws SQLException, IOException{
+		connect_to_db();
+		String query = "Select * from BASEPRICE where pr_Size = '" + size + "' and pr_Crust = '" + type + "';";
+		Statement stmt = conn.createStatement();
+		ResultSet rset = stmt.executeQuery(query);
+		Double price = 0.0;
+
+		while(rset.next())
+		{
+			price = rset.getDouble(3);
+		}
+
+		conn.close();
+		return price;
+	}
 }
