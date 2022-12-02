@@ -189,7 +189,7 @@ public class Menu {
 						System.out.println("Invalid option");
 				}
 
-				Integer orderId = (DBNinja.getCurrentOrders().size() + 1);
+				Integer orderId = (DBNinja.getCurrentOrders("noDate").size() + 1);
 				Pizza pizza = new Pizza(orderId, pCrust, pSize, pizzaTimeStamp);
 
 				DBNinja.addPizza(pizza);
@@ -197,7 +197,6 @@ public class Menu {
 				Boolean wantMoreTopping = false;
 
 				do {
-
 					ViewInventoryLevels();
 					System.out.println("What topping would you like to add:");
 
