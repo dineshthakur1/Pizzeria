@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import static cpsc4620.DBNinja.getCustomerList;
@@ -188,9 +188,10 @@ public class Menu {
 					default:
 						System.out.println("Invalid option");
 				}
-
+				long millis=System.currentTimeMillis();
+				java.sql.Date date = new java.sql.Date(millis);
 				Integer orderId = (DBNinja.getCurrentOrders("noDate").size() + 1);
-				Pizza pizza = new Pizza(orderId, pCrust, pSize, pizzaTimeStamp);
+				Pizza pizza = new Pizza(orderId, pCrust, pSize, date);
 
 				DBNinja.addPizza(pizza);
 
