@@ -154,9 +154,11 @@ public class Menu {
 			boolean pizzaContd= true;
 			while(pizzaContd)
 			{
-				System.out.println("Let's decide, what size of pizza would you like: \n1.Small\n2.Medium\n3.Large\n4.Extra_Large \nPlease enter corresponding number[1-4]:");
+				System.out.println("Let's decide, what size of pizza would you like: " +
+						"\n1.Small\n2.Medium\n3.Large\n4.Extra_Large \nPlease enter corresponding number[1-4]:");
 				Integer pizzaSize = Integer.parseInt(reader.readLine());
-				switch(orderCh)
+				pSize = "";
+				switch(pizzaSize)
 				{
 					case 1:
 						pSize="Small";
@@ -169,9 +171,11 @@ public class Menu {
 					default:
 						System.out.println("Invalid option");
 				}
-				System.out.println("Now tell us what crust would you like for your Pizza : \n1.Thin\n2.Original\n3.Pan\n4.Gluten-Free \nPlease enter corresponding number[1-4]:");
+				System.out.println("Now tell us what crust would you like for your Pizza : " +
+						"\n1.Thin\n2.Original\n3.Pan\n4.Gluten-Free \nPlease enter corresponding number[1-4]:");
 				Integer pizzaCrust = Integer.parseInt(reader.readLine());
-				switch(orderCh)
+				pCrust = "";
+				switch(pizzaCrust)
 				{
 					case 1:
 						pCrust="Thin";
@@ -185,8 +189,8 @@ public class Menu {
 						System.out.println("Invalid option");
 				}
 
-
-				Pizza pizza = new Pizza(orderId, Pizza.getPizzaCrustFromInt(pizzaCrust), Pizza.getPizzaSizeFromInt(pizzaSize), pizzaTimeStamp);
+				Integer orderId = (DBNinja.getCurrentOrders().size() + 1);
+				Pizza pizza = new Pizza(orderId, pCrust, pSize, pizzaTimeStamp);
 
 				DBNinja.addPizza(pizza);
 
