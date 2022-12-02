@@ -174,20 +174,17 @@ public class Menu {
 				switch(orderCh)
 				{
 					case 1:
-						orderType="dinein";
-						System.out.println("Enter table number: ");
-						tableNo = Integer.parseInt(reader.readLine());
-
+						pCrust="Thin";
 					case 2:
-						orderType="pickup";
+						pCrust="Original";
 					case 3:
-						orderType="delivery";
-						System.out.println("Enter address: ");
-						address = reader.readLine();
+						pCrust="Pan";
+					case 4:
+						pCrust="Gluten-Free";
 					default:
 						System.out.println("Invalid option");
 				}
-				String pizzaTimeStamp = getTimeStamp();
+
 
 				Pizza pizza = new Pizza(orderId, Pizza.getPizzaCrustFromInt(pizzaCrust), Pizza.getPizzaSizeFromInt(pizzaSize), pizzaTimeStamp);
 
