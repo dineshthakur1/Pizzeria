@@ -11,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import static cpsc4620.DBNinja.getCustomerList;
+import static cpsc4620.DBNinja.getMaxPizzaID;
 
 /*
  * This file is where the front end magic happens.
@@ -140,7 +141,6 @@ public class Menu {
 					orderType="dinein";
 					System.out.println("Enter table number: ");
 					tableNo = Integer.parseInt(reader.readLine());
-
 				case 2:
 					orderType="pickup";
 				case 3:
@@ -191,7 +191,10 @@ public class Menu {
 				long millis=System.currentTimeMillis();
 				java.sql.Date date = new java.sql.Date(millis);
 				Integer orderId = (DBNinja.getCurrentOrders("noDate").size() + 1);
-				Pizza pizza = new Pizza(orderId, pCrust, pSize, date);
+				Integer pID = getMaxPizzaID() + 1;
+				Double pCustPrice = 0.0;
+				Double pBusPrice = 0.0;
+				Pizza pizza = new Pizza(pID, pSize, pCrust, orderId, "incomplete", date, );
 
 				DBNinja.addPizza(pizza);
 
@@ -257,8 +260,8 @@ public class Menu {
 
 				DBNinja.updatePizzaDetails(pizza);
 
-				orderTotalCost += pizza.getPizzaCost();
-				orderTotalPrice += pizza.getPizzaPrice();
+				orderTotalCost += pizza.getBusPrice();
+				orderTotalPrice += pizza.getCustPrice();
 
 				System.out.println("Would you like to add another pizza?[y/n]");
 

@@ -141,14 +141,17 @@ public final class DBNinja {
 		 * It goes and fetches the largest PizzaID in the pizza table.
 		 * You wont need this function if you didn't forget to do that
 		 */
-		//TODO
-		
-		
-		
-		
-		
+		String query = "SELECT COUNT(p_ID) FROM PIZZA;";
+		Statement stmt = conn.createStatement();
+		ResultSet rset = stmt.executeQuery(query);
+		Integer max = 0;
+		while (rset.next()){
+			max = rset.getInt(1);
+		}
+
+		conn.close();
 		//DO NOT FORGET TO CLOSE YOUR CONNECTION
-		return -1;
+		return max;
 	}
 	
 	public static void useTopping(Pizza p, Topping t, boolean isDoubled) throws SQLException, IOException //this function will update toppings inventory in SQL and add entities to the Pizzatops table. Pass in the p pizza that is using t topping
